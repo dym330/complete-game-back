@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
+    // リレーション
+    public function items() {
+        return $this->belongsToMany(Item::class, 'possessions');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

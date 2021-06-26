@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -61,14 +62,13 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function logout() {
         // tokenの削除
-        // auth()->user()->tokens()->delete();
-        $user = auth()->user();
+        auth()->user()->tokens()->delete();
 
-        return $user;
+        return response(['message' => 'ok'], 200);
     }
 }
